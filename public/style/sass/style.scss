@@ -82,3 +82,25 @@ h1 {
 #start {
     margin-top: 1%;
 }
+#alert {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    width: 150px !important;
+    height: 150px !important;
+    img {
+        opacity: 1;
+        animation: alertAnim ease-in 1s infinite alternate;
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+@keyframes alertAnim {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

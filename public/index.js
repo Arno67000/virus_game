@@ -1,42 +1,81 @@
 "use strict";
 class Game {
-    constructor(level) {
+    constructor(level, canva, timer, startButton, scoreArea, alertArea) {
         this.running = false;
+        this.level = level;
         this.time = 59 + level;
         this.breakpoint = 51 - level;
-        this.delay = 6000 - level * level;
+        this.delay = 3000 - level * level;
         this.score = 0;
         this.running = false;
         this.over = false;
+        this.won = false;
+        this.alertArea = alertArea;
+        this.canva = canva;
+        this.timer = timer;
+        this.startButton = startButton;
+        this.scoreArea = scoreArea;
     }
-    isOn() {
-        return this.running;
+    prepare() {
+        this.disableAlert();
+        this.canva.addEventListener("click", (event) => {
+            const targetElement = event.target;
+            if (this.running &&
+                isHTMLElement(targetElement) &&
+                targetElement.classList.contains("virus")) {
+                targetElement.remove();
+                this.score++;
+                this.scoreArea.textContent = String(this.score);
+            }
+        });
+        this.startButton.addEventListener("click", () => {
+            if (!this.running && this.won)
+                this.level++;
+            !this.running && this.start();
+        });
     }
-    gameOver(board) {
-        console.log(board.getElementsByClassName("virus").length);
-        return board.getElementsByClassName("virus").length >= this.breakpoint;
-    }
-    start(board) {
-        if (!this.isOn()) {
+    start() {
+        if (!this.running) {
             this.running = true;
             this.over = false;
+            this.disableStartButton();
         }
-        if (!this.over) {
-            this.run(board);
+        else {
+            alert("game is already running");
         }
+        this.enableAlert();
+        this.run();
     }
-    run(board) {
-        this.over = this.gameOver(board);
-        if (!this.over) {
-            this.addVirus(board);
+    run() {
+        this.over = this.gameOver();
+        if (this.time === 0 && !this.over) {
+            // handle score && message et button next wave
+            this.running = false;
+            this.won = true;
+            this.enableStartButton();
+            alert("you win");
+        }
+        else if (!this.over) {
+            const invaders = this.level % 2 ? this.level / 2 : Math.round(this.level % 2);
+            for (let i = 0; i < invaders; i++) {
+                this.addVirus();
+            }
             setTimeout(() => {
-                this.run(board);
+                this.time--;
+                this.timer.textContent = String(this.time);
+                this.run();
             }, this.delay);
         }
+        else {
+            // handle score && message et button start
+            this.running = false;
+            this.over = true;
+            alert("game over");
+        }
     }
-    addVirus(target) {
-        const targetHeight = target.clientHeight;
-        const targetWidth = target.clientWidth;
+    addVirus() {
+        const targetHeight = this.canva.clientHeight;
+        const targetWidth = this.canva.clientWidth;
         const virus = new Image();
         virus.src = "./assets/images/sprites/virus.png";
         virus.classList.add("virus");
@@ -49,9 +88,25 @@ class Game {
         virus.style.setProperty("--left", `${offsetY > 0 ? offsetY : virusSize / 2}px`);
         virus.style.setProperty("--trX", `${defineTranslate(targetWidth, offsetY, virusSize)}px`);
         virus.style.setProperty("--trY", `${defineTranslate(targetHeight, offsetX, virusSize)}px`);
-        target.appendChild(virus);
+        this.canva.appendChild(virus);
+    }
+    gameOver() {
+        return (this.canva.getElementsByClassName("virus").length >= this.breakpoint);
+    }
+    enableAlert() {
+        this.alertArea.removeAttribute("hidden");
+    }
+    disableAlert() {
+        this.alertArea.setAttribute("hidden", "true");
+    }
+    enableStartButton() {
+        this.startButton.removeAttribute("disabled");
+    }
+    disableStartButton() {
+        this.startButton.setAttribute("disabled", "true");
     }
 }
+// Randomizers
 const randomize = (number) => Math.random() * number;
 const maybeMinus = () => (randomize(1) < 0.5 ? -1 : 1);
 const defineTranslate = (size, offset, virusSize) => {
@@ -64,27 +119,20 @@ const defineTranslate = (size, offset, virusSize) => {
         return translate;
     }
 };
-let game = null;
-let startButton;
-let score;
-let canva;
-let time;
-const gameLevel = 1;
+// checkers
+function isHTMLElement(el) {
+    return el && typeof el === "object" && Reflect.get(el, "classList");
+}
+// init game
 (() => {
-    startButton = document.getElementById("start");
-    canva = document.getElementById("canva");
-    score = document.getElementById("score");
-    time = document.getElementById("time");
-    if (!canva || !time || !score || !startButton) {
+    const startButton = document.getElementById("start");
+    const canva = document.getElementById("canva");
+    const score = document.getElementById("score");
+    const time = document.getElementById("time");
+    const alertArea = document.getElementById("alert");
+    if (!canva || !time || !score || !startButton || !alertArea) {
         alert("Missing element in page, please reload and try again.");
         return;
     }
-    canva.addEventListener("click", (event) => {
-        console.log("targeted => ", event.target);
-    });
-    startButton.addEventListener("click", (event) => {
-        console.log(event);
-        game = new Game(gameLevel);
-        canva && game.start(canva);
-    });
+    new Game(1, canva, time, startButton, score, alertArea).prepare();
 })();
