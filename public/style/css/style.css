@@ -1,0 +1,86 @@
+html body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("../../assets/images/backgrounds/back.jpg");
+}
+
+.container {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.canva {
+  background-image: url("../../assets/images/backgrounds/city.jpg") !important;
+  border: 4px silver inset;
+  width: 1500px;
+  height: 800px;
+  cursor: crosshair;
+  position: relative !important;
+}
+
+.virus {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  transform: translate(-50%, -50%);
+  height: var(--y);
+  width: var(--x);
+  --scaler: 1;
+  animation: virusAnim 14s forwards;
+}
+.virus:hover {
+  --scaler: 1.03;
+}
+.virus:active {
+  --scaler: 0.97;
+}
+
+@keyframes virusAnim {
+  from {
+    transform: translate(0%, 0%) scale(var(--scaler));
+  }
+  to {
+    transform: translate(var(--trX), var(--trY)) scale(var(--scaler));
+  }
+}
+.menu {
+  box-sizing: border-box;
+  height: 808px;
+  width: 300px;
+  background-color: black;
+  border-radius: 20px 0px 0px 20px;
+  border-left: aqua 1px inset;
+  border-bottom: aqua 1px inset;
+  border-top: aqua 1px inset;
+  border-right: silver 4px groove;
+  color: aquamarine;
+  padding: 1% 1% 0 1%;
+}
+.menu_board {
+  margin-top: 5%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.description {
+  text-align: justify;
+}
+
+#start {
+  margin-top: 1%;
+}
+
+/*# sourceMappingURL=style.css.map */
