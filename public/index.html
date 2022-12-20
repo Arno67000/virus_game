@@ -24,13 +24,19 @@
                 <button id="start">Start level</button>
                 <div class="menu_board">
                     <p>Days left in containment : <span id="time">60</span></p>
+                    <p>Current level : <span id="level">1</span></p>
                     <p>Score : <span id="score">0</span></p>
                 </div>
-                <div id="alert" hidden="true">
+                <div id="alert-area" hidden="true">
                     <img
+                        id="alert"
                         src="assets/images//sprites/alert.png"
                         alt="alert covid sign"
                     />
+                </div>
+                <div id="results-area">
+                    <h2 id="result"></h2>
+                    <p id="accuracy"></p>
                 </div>
             </div>
             <div class="canva" id="canva"></div>

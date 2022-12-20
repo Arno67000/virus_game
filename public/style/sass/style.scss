@@ -1,11 +1,17 @@
+@font-face {
+    font-family: "laconic";
+    src: url("../fonts//Laconic_Regular.otf");
+}
+
 html body {
     height: 100%;
 }
 body {
     margin: 0;
     padding: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: laconic, Roboto, "Helvetica Neue", sans-serif;
     background-image: url("../../assets/images/backgrounds/back.jpg");
+    user-select: none;
 }
 
 .container {
@@ -35,7 +41,7 @@ body {
     height: var(--y);
     width: var(--x);
     --scaler: 1;
-    animation: virusAnim 14s forwards;
+    animation: virusAnim 14s infinite alternate;
 
     &:hover {
         --scaler: 1.03;
@@ -74,27 +80,40 @@ body {
 h1 {
     text-align: center;
 }
+h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
 
 .description {
     text-align: justify;
 }
 
 #start {
-    margin-top: 1%;
+    background-color: aquamarine;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
-#alert {
+#alert-area {
     display: flex;
     justify-content: center;
     position: relative;
     margin: auto;
     width: 150px !important;
     height: 150px !important;
-    img {
-        opacity: 1;
-        animation: alertAnim ease-in 1s infinite alternate;
-        width: 100px !important;
-        height: 100px !important;
-    }
+}
+#alert {
+    opacity: 1;
+    animation: alertAnim ease-in 1s infinite alternate;
+    width: 100px !important;
+    height: 100px !important;
 }
 @keyframes alertAnim {
     from {
