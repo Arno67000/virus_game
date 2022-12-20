@@ -9,7 +9,7 @@
         "lint": "eslint . --ext .ts",
         "format": "eslint . --ext .ts --fix",
         "sass": "sass --watch public/style/sass/style.scss:public/style/css/style.css",
-        "test": ""
+        "start": "npx http-server"
     },
     "repository": {
         "type": "git",
