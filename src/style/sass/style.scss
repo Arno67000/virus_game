@@ -1,35 +1,39 @@
 @font-face {
     font-family: "laconic";
-    src: url("../fonts//Laconic_Regular.otf");
+    src: url("../../assets/fonts/Laconic_Regular.otf");
 }
 
 html body {
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 body {
     margin: 0;
     padding: 0;
     font-family: laconic, Roboto, "Helvetica Neue", sans-serif;
-    background-image: url("../../assets/images/backgrounds/back.jpg");
+    background-image: url("../../assets/images/back.jpg");
+    background-size: cover;
+    background-repeat: repeat;
     user-select: none;
 }
 
 .container {
-    box-sizing: content-box;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
     margin: auto;
-    margin-top: 1%;
+    // margin-top: 10%;
 }
 
 .canva {
-    background-image: url("../../assets/images/backgrounds/city.jpg") !important;
-    border: 4px silver inset;
-    width: 1500px;
-    height: 800px;
+    background-image: url("../../assets/images/city.jpg") !important;
+    background-size: cover;
+    border: 2px silver inset;
+    width: 78%;
+    height: 90%;
     cursor: crosshair;
     position: relative !important;
 }
@@ -61,13 +65,13 @@ body {
 
 .menu {
     box-sizing: border-box;
-    height: 808px;
-    width: 300px;
+    height: 90%;
+    width: 20%;
     background-color: black;
     border-radius: 20px 0px 0px 20px;
-    border-left: aqua 1px inset;
-    border-bottom: aqua 1px inset;
-    border-top: aqua 1px inset;
+    border-left: aqua 1px outset;
+    border-bottom: aqua 4px outset;
+    border-top: aqua 4px outset;
     border-right: silver 4px groove;
     color: aquamarine;
     padding: 1% 1% 0 1%;

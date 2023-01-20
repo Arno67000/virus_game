@@ -1,3 +1,6 @@
+import { Virus } from "./sprites/virus";
+
+import VIRUS_IMG from "./assets/images/virus.png";
 class Game {
     private accuracyArea: HTMLElement;
     private alertArea: HTMLElement;
@@ -117,36 +120,8 @@ class Game {
     }
 
     addVirus() {
-        const targetHeight = this.canva.clientHeight;
-        const targetWidth = this.canva.clientWidth;
-
-        const virus = new Image();
-        virus.src = "./assets/images/sprites/virus.png";
-        virus.classList.add("virus");
-
-        const virusSize = Math.random() * 45 + 30;
-        virus.style.setProperty("--x", `${virusSize}px`);
-        virus.style.setProperty("--y", `${virusSize}px`);
-
-        const offsetX = randomize(targetHeight) - virusSize / 2;
-        const offsetY = randomize(targetWidth) - virusSize / 2;
-        virus.style.setProperty(
-            "--top",
-            `${offsetX > 0 ? offsetX : virusSize / 2}px`
-        );
-        virus.style.setProperty(
-            "--left",
-            `${offsetY > 0 ? offsetY : virusSize / 2}px`
-        );
-        virus.style.setProperty(
-            "--trX",
-            `${defineTranslate(targetWidth, offsetY, virusSize)}px`
-        );
-        virus.style.setProperty(
-            "--trY",
-            `${defineTranslate(targetHeight, offsetX, virusSize)}px`
-        );
-        this.canva.appendChild(virus);
+        const virus = new Virus(VIRUS_IMG, this.canva);
+        this.canva.appendChild(virus.image);
     }
 
     gameOver(): boolean {
