@@ -1,5 +1,5 @@
 export class Virus {
-    image: HTMLImageElement;
+    private image: HTMLImageElement;
     private size: number;
     private offsetX: number;
     private offsetY: number;
@@ -26,6 +26,9 @@ export class Virus {
             "--trY",
             `${this.defineTranslate(canva.clientHeight, this.offsetX)}px`
         );
+    }
+    get(): HTMLImageElement {
+        return this.image;
     }
 
     private defineTranslate(size: number, offset: number) {
