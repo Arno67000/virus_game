@@ -10,10 +10,10 @@
         <title>Virus Clicker Game</title>
     </head>
     <body>
-        <div class="container">
-            <div class="menu">
+        <div class="game">
+            <div class="game__menu">
                 <h1>VIRUS ALERT</h1>
-                <div class="description">
+                <div class="game__menu--description">
                     <p>
                         The city is besieged by a dangerous virus and
                         containment has been activated. You are here to fight
@@ -21,13 +21,19 @@
                     </p>
                     <p>Do you think you're ready ?</p>
                 </div>
-                <button id="start">Start level</button>
-                <div class="menu_board">
+                <button class="game__menu--start" id="start">
+                    Start level
+                </button>
+                <div class="game__menu--board">
                     <p>Days left in containment : <span id="time">60</span></p>
                     <p>Current level : <span id="level">1</span></p>
                     <p>Score : <span id="score">0</span></p>
                 </div>
-                <div id="alert-area" hidden="true">
+                <div
+                    class="game__menu--alert-area"
+                    id="alert-area"
+                    hidden="true"
+                >
                     <img
                         id="alert"
                         src="assets/images/alert.png"
@@ -39,7 +45,7 @@
                     <p id="accuracy"></p>
                 </div>
             </div>
-            <div class="canva" id="canva"></div>
+            <div class="game__canva" id="canva"></div>
         </div>
     </body>
 </html>

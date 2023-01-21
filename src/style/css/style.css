@@ -1,7 +1,27 @@
+/* FONTS */
 @font-face {
   font-family: "laconic";
   src: url("../../assets/fonts/Laconic_Regular.otf");
 }
+/* VARIABLES */
+/* ANIMATIONS */
+@keyframes virusAnim {
+  from {
+    transform: translate(0%, 0%) scale(var(--scaler));
+  }
+  to {
+    transform: translate(var(--trX), var(--trY)) scale(var(--scaler));
+  }
+}
+@keyframes alertAnim {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* GENERICS */
 html body {
   height: 100vh;
   width: 100vw;
@@ -17,7 +37,18 @@ body {
   user-select: none;
 }
 
-.container {
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+/* GAME STYLES */
+.game {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -26,15 +57,52 @@ body {
   width: 100%;
   margin: auto;
 }
-
-.canva {
-  background-image: url("../../assets/images/city.jpg") !important;
+.game__menu {
+  box-sizing: border-box;
+  height: 90%;
+  width: 20%;
+  background-color: black;
+  border-radius: 20px 0px 0px 20px;
+  border-left: aqua 1px outset;
+  border-bottom: aqua 4px outset;
+  border-top: aqua 4px outset;
+  border-right: silver 4px groove;
+  color: aquamarine;
+  padding: 1% 1% 0 1%;
+}
+.game__menu--description {
+  text-align: justify;
+}
+.game__menu--board {
+  margin-top: 5%;
+}
+.game__menu--start {
+  background-color: aquamarine;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  margin: auto;
+  width: 100%;
+  height: auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.game__menu--alert-area {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: auto;
+  width: 60%;
+  height: auto;
+}
+.game__canva {
+  background-image: url("../../assets/images/city.jpg");
   background-size: cover;
   border: 2px silver inset;
   width: 78%;
   height: 90%;
   cursor: crosshair;
-  position: relative !important;
+  position: relative;
 }
 
 .virus {
@@ -54,80 +122,12 @@ body {
   --scaler: 0.97;
 }
 
-@keyframes virusAnim {
-  from {
-    transform: translate(0%, 0%) scale(var(--scaler));
-  }
-  to {
-    transform: translate(var(--trX), var(--trY)) scale(var(--scaler));
-  }
-}
-.menu {
-  box-sizing: border-box;
-  height: 90%;
-  width: 20%;
-  background-color: black;
-  border-radius: 20px 0px 0px 20px;
-  border-left: aqua 1px outset;
-  border-bottom: aqua 4px outset;
-  border-top: aqua 4px outset;
-  border-right: silver 4px groove;
-  color: aquamarine;
-  padding: 1% 1% 0 1%;
-}
-.menu_board {
-  margin-top: 5%;
-}
-
-h1 {
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: bolder;
-}
-
-.description {
-  text-align: justify;
-}
-
-#start {
-  background-color: aquamarine;
-  color: black;
-  border: none;
-  border-radius: 20px;
-  margin: auto;
-  width: 100%;
-  height: auto;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-#alert-area {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  margin: auto;
-  width: 150px !important;
-  height: 150px !important;
-}
-
 #alert {
+  box-sizing: border-box;
   opacity: 1;
   animation: alertAnim ease-in 1s infinite alternate;
-  width: 100px !important;
-  height: 100px !important;
-}
-
-@keyframes alertAnim {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  width: 75%;
+  height: 75%;
 }
 
 /*# sourceMappingURL=style.css.map */
