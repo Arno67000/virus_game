@@ -24,6 +24,10 @@ This is a survival clicker game, the main goal is to destroy all virus before th
 
 #
 
+### _Screenshots_
+
+#
+
 ![alt text](src/assets/screenshots/Screenshot_1.png)
 
 #
