@@ -21,3 +21,9 @@ This is a survival clicker game, the main goal is to destroy all virus before th
 ### Production
 
 -   run `yarn build` to build into `dist` directory
+
+#
+
+![alt text](src/assets/screenshots/Screenshot_1.png)
+
+#
