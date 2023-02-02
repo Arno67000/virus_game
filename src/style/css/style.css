@@ -80,13 +80,17 @@ h2 {
 .game__menu--start {
   background-color: aquamarine;
   color: black;
-  border: none;
-  border-radius: 20px;
   margin: auto;
-  width: 100%;
   height: auto;
   font-size: 1.2rem;
   font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+}
+.game__menu--start:hover {
+  background-color: aqua;
 }
 .game__menu--alert-area {
   display: flex;

@@ -90,15 +90,12 @@ h2 {
             margin-top: 5%;
         }
         &--start {
-            background-color: aquamarine;
-            color: black;
+            @include button;
             border: none;
             border-radius: $STD_RADIUS;
-            margin: auto;
-            width: 100%;
-            height: auto;
-            font-size: 1.2rem;
-            font-weight: bold;
+            &:hover {
+                background-color: aqua;
+            }
         }
         &--alert-area {
             display: flex;
