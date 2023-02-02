@@ -1,7 +1,9 @@
-import { Game } from "./game";
+import { Game } from "./game/game";
+import { User } from "./game/user";
+import { Board } from "./view/board";
 import { Menu } from "./view/menu";
 
-(() => {
+(async () => {
     const accuracyArea = document.getElementById("accuracy");
     const alertArea = document.getElementById("alert");
     const levelArea = document.getElementById("level");
@@ -10,6 +12,10 @@ import { Menu } from "./view/menu";
     const startButton = document.getElementById("start");
     const timerArea = document.getElementById("time");
     const canva = document.getElementById("canva");
+    const menuArea = document.getElementById("menu");
+    const loginForm = document.getElementById("login");
+    const submit = document.getElementById("submit");
+    const input = document.getElementById("name");
     if (
         !canva ||
         !timerArea ||
@@ -18,11 +24,25 @@ import { Menu } from "./view/menu";
         !alertArea ||
         !levelArea ||
         !resultArea ||
-        !accuracyArea
+        !accuracyArea ||
+        !menuArea ||
+        !loginForm ||
+        !submit ||
+        !input
     ) {
         alert("Missing element in page, please reload and try again.");
         return;
     }
+
+    const board = new Board(
+        canva,
+        menuArea,
+        loginForm,
+        input as HTMLInputElement,
+        submit
+    );
+    board.prepare();
+    const user = new User(await board.getUsername());
     const menu = new Menu(
         accuracyArea,
         alertArea,
@@ -32,5 +52,5 @@ import { Menu } from "./view/menu";
         startButton,
         timerArea
     );
-    new Game(1, canva, menu).prepare();
+    new Game(canva, menu, user).prepare();
 })();

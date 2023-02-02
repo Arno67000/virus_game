@@ -4,6 +4,18 @@
     src: url("../../assets/fonts/Laconic_Regular.otf");
 }
 
+/* MIXINS */
+@mixin button {
+    background-color: aquamarine;
+    color: black;
+    margin: auto;
+    height: auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+}
+
 /* VARIABLES */
 $STD_RADIUS: 20px;
 
@@ -78,15 +90,12 @@ h2 {
             margin-top: 5%;
         }
         &--start {
-            background-color: aquamarine;
-            color: black;
+            @include button;
             border: none;
             border-radius: $STD_RADIUS;
-            margin: auto;
-            width: 100%;
-            height: auto;
-            font-size: 1.2rem;
-            font-weight: bold;
+            &:hover {
+                background-color: aqua;
+            }
         }
         &--alert-area {
             display: flex;
@@ -133,4 +142,50 @@ h2 {
     animation: alertAnim ease-in 1s infinite alternate;
     width: 75%;
     height: 75%;
+}
+
+.login {
+    border-radius: $STD_RADIUS;
+    background-color: black;
+    color: silver;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-bottom: 1%;
+    width: 30%;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: auto;
+        height: 15vh;
+        width: 50%;
+
+        &--submit {
+            border-radius: 5px;
+            @include button;
+            &:hover {
+                background-color: silver;
+            }
+        }
+
+        &--input {
+            border: 1px silver solid;
+            background-color: silver;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        &--label {
+            width: 100%;
+            margin-bottom: 1.5%;
+            font-style: italic;
+        }
+    }
 }
