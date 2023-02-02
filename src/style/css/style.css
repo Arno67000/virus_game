@@ -3,6 +3,7 @@
   font-family: "laconic";
   src: url("../../assets/fonts/Laconic_Regular.otf");
 }
+/* MIXINS */
 /* VARIABLES */
 /* ANIMATIONS */
 @keyframes virusAnim {
@@ -128,6 +129,55 @@ h2 {
   animation: alertAnim ease-in 1s infinite alternate;
   width: 75%;
   height: 75%;
+}
+
+.login {
+  border-radius: 20px;
+  background-color: black;
+  color: silver;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-bottom: 1%;
+  width: 30%;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
+  height: 15vh;
+  width: 50%;
+}
+.login__form--submit {
+  border-radius: 5px;
+  background-color: aquamarine;
+  color: black;
+  margin: auto;
+  height: auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+}
+.login__form--submit:hover {
+  background-color: silver;
+}
+.login__form--input {
+  border: 1px silver solid;
+  background-color: silver;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+.login__form--label {
+  width: 100%;
+  margin-bottom: 1.5%;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=style.css.map */

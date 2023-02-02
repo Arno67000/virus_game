@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="game">
-            <div class="game__menu">
+            <div class="game__menu" id="menu">
                 <h1>VIRUS ALERT</h1>
                 <div class="game__menu--description">
                     <p>
@@ -46,6 +46,31 @@
                 </div>
             </div>
             <div class="game__canva" id="canva"></div>
+            <div class="login" id="login">
+                <h1>Welcome player</h1>
+                <div class="login__form">
+                    <label for="name" class="login__form--label"
+                        >Enter your name</label
+                    >
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="login__form--input"
+                        autocapitalize="characters"
+                        novalidate
+                        autocomplete="off"
+                        autofocus
+                    />
+                    <input
+                        type="button"
+                        value="PLAY"
+                        class="login__form--submit"
+                        id="submit"
+                        novalidate
+                    />
+                </div>
+            </div>
         </div>
     </body>
 </html>
