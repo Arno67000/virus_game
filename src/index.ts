@@ -1,56 +1,46 @@
+import { isGamePlayable } from "./game/checkers";
 import { Game } from "./game/game";
 import { User } from "./game/user";
 import { Board } from "./view/board";
 import { Menu } from "./view/menu";
+import assert from "assert";
+import { storageInit } from "./storage/handler";
 
 (async () => {
-    const accuracyArea = document.getElementById("accuracy");
-    const alertArea = document.getElementById("alert");
-    const levelArea = document.getElementById("level");
-    const resultArea = document.getElementById("result");
-    const scoreArea = document.getElementById("score");
-    const startButton = document.getElementById("start");
-    const timerArea = document.getElementById("time");
-    const canva = document.getElementById("canva");
-    const menuArea = document.getElementById("menu");
-    const loginForm = document.getElementById("login");
-    const submit = document.getElementById("submit");
-    const input = document.getElementById("name");
-    if (
-        !canva ||
-        !timerArea ||
-        !scoreArea ||
-        !startButton ||
-        !alertArea ||
-        !levelArea ||
-        !resultArea ||
-        !accuracyArea ||
-        !menuArea ||
-        !loginForm ||
-        !submit ||
-        !input
-    ) {
-        alert("Missing element in page, please reload and try again.");
-        return;
-    }
+    const htmlElements = {
+        accuracyArea: document.getElementById("accuracy"),
+        alertArea: document.getElementById("alert"),
+        levelArea: document.getElementById("level"),
+        resultArea: document.getElementById("result"),
+        scoreArea: document.getElementById("score"),
+        startButton: document.getElementById("start"),
+        timerArea: document.getElementById("time"),
+        canva: document.getElementById("canva"),
+        menuArea: document.getElementById("menu"),
+        loginForm: document.getElementById("login"),
+        submit: document.getElementById("submit"),
+        input: document.getElementById("name"),
+        nameArea: document.getElementById("p_name"),
+        checkbox: document.getElementById("restart"),
+        statsAcc: document.getElementById("acc"),
+        statsBest: document.getElementById("best"),
+        statsKilled: document.getElementById("killed"),
+        leaderboardButton: document.getElementById("leaderboard"),
+        modal: document.getElementById("modal"),
+        modalCloseButton: document.getElementById("close_modal"),
+    };
+    try {
+        assert.ok(isGamePlayable(htmlElements));
+        storageInit();
 
-    const board = new Board(
-        canva,
-        menuArea,
-        loginForm,
-        input as HTMLInputElement,
-        submit
-    );
-    board.prepare();
-    const user = new User(await board.getUsername());
-    const menu = new Menu(
-        accuracyArea,
-        alertArea,
-        levelArea,
-        resultArea,
-        scoreArea,
-        startButton,
-        timerArea
-    );
-    new Game(canva, menu, user).prepare();
+        const board = new Board(htmlElements);
+        board.prepare();
+
+        const user = new User(await board.getUsername());
+        const menu = new Menu(htmlElements);
+
+        new Game(htmlElements.canva, menu, user).prepare();
+    } catch (error) {
+        alert(error);
+    }
 })();

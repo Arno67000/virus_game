@@ -1,54 +1,56 @@
+import { ElementList } from "../schemas/interfaces";
+
 export class Board {
     private canva: HTMLElement;
     private menuArea: HTMLElement;
     private loginForm: HTMLElement;
     private input: HTMLInputElement;
+    private restart: HTMLInputElement;
     private submit: HTMLElement;
 
-    constructor(
-        canva: HTMLElement,
-        menuArea: HTMLElement,
-        loginForm: HTMLElement,
-        input: HTMLInputElement,
-        submit: HTMLElement
-    ) {
-        this.canva = canva;
-        this.menuArea = menuArea;
-        this.loginForm = loginForm;
-        this.input = input;
-        this.submit = submit;
+    constructor(elements: ElementList) {
+        this.canva = elements.canva;
+        this.menuArea = elements.menuArea;
+        this.loginForm = elements.loginForm;
+        this.input = elements.input;
+        this.restart = elements.checkbox;
+        this.submit = elements.submit;
     }
 
     prepare() {
-        this.canva.setAttribute("hidden", "true");
-        this.menuArea.setAttribute("hidden", "true");
+        this.canva.style.opacity = "0";
+        this.menuArea.style.opacity = "0";
     }
 
-    async getUsername(): Promise<string> {
-        return new Promise<string>((resolve) => {
+    async getUsername(): Promise<{ name: string; restart: boolean }> {
+        return new Promise<{ name: string; restart: boolean }>((resolve) => {
             this.input.addEventListener("keyup", (e) => {
-                const value = this.input.value.toUpperCase();
-                if (e.key === "Enter" && value.length > 0) {
+                const restart = this.restart.checked;
+                const name = this.input.value.toUpperCase();
+                if (e.key === "Enter" && name.length > 0) {
                     this.clear();
-                    resolve(this.input.value.toUpperCase());
+                    resolve({ name, restart });
                 }
             });
             this.submit.addEventListener("click", () => {
-                const value = this.input.value.toUpperCase();
-                if (value.length > 0) {
+                const restart = this.restart.checked;
+                const name = this.input.value.toUpperCase();
+                if (name.length > 0) {
                     this.clear();
-                    resolve(this.input.value.toUpperCase());
+                    resolve({ name, restart });
                 }
             });
         });
     }
 
     clear() {
+        this.restart.checked = false;
+        this.restart.replaceWith(this.restart.cloneNode());
         this.input.value = "";
         this.input.replaceWith(this.input.cloneNode());
         this.submit.replaceWith(this.submit.cloneNode());
         this.loginForm.remove();
-        this.canva.removeAttribute("hidden");
-        this.menuArea.removeAttribute("hidden");
+        this.canva.style.opacity = "1";
+        this.menuArea.style.opacity = "1";
     }
 }
