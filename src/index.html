@@ -14,63 +14,128 @@
             <div class="game__menu" id="menu">
                 <h1>VIRUS ALERT</h1>
                 <div class="game__menu--description">
+                    <p>Welcome <span id="p_name"></span> !</p>
                     <p>
                         The city is besieged by a dangerous virus and
                         containment has been activated. You are here to fight
                         the virus to stop it from overwhelming the city !!
                     </p>
                     <p>Do you think you're ready ?</p>
+                    <button class="game__menu--start" id="start">
+                        Start level
+                    </button>
                 </div>
-                <button class="game__menu--start" id="start">
-                    Start level
-                </button>
                 <div class="game__menu--board">
                     <p>Days left in containment : <span id="time">60</span></p>
                     <p>Current level : <span id="level">1</span></p>
                     <p>Score : <span id="score">0</span></p>
                 </div>
-                <div
-                    class="game__menu--alert-area"
-                    id="alert-area"
-                    hidden="true"
-                >
-                    <img
-                        id="alert"
-                        src="assets/images/alert.png"
-                        alt="alert covid sign"
-                    />
-                </div>
-                <div id="results-area">
+                <div id="results-area" class="game__results--area">
+                    <div
+                        class="game__menu--alert-area"
+                        id="alert-area"
+                        hidden="true"
+                    >
+                        <img
+                            id="alert"
+                            src="assets/images/alert.png"
+                            alt="alert covid sign"
+                        />
+                    </div>
                     <h2 id="result"></h2>
                     <p id="accuracy"></p>
                 </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>YOUR STATS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>accuracy (%)</th>
+                            <td id="acc"></td>
+                        </tr>
+                        <tr>
+                            <th>best score</th>
+                            <td id="best"></td>
+                        </tr>
+                        <tr>
+                            <th>virus killed</th>
+                            <td id="killed"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="game__menu--scores" id="leaderboard">
+                    Leaderboard
+                </button>
             </div>
             <div class="game__canva" id="canva"></div>
-            <div class="login" id="login">
-                <h1>Welcome player</h1>
-                <div class="login__form">
-                    <label for="name" class="login__form--label"
-                        >Enter your name</label
-                    >
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        class="login__form--input"
-                        autocapitalize="characters"
-                        novalidate
-                        autocomplete="off"
-                        autofocus
-                    />
-                    <input
-                        type="button"
-                        value="PLAY"
-                        class="login__form--submit"
-                        id="submit"
-                        novalidate
-                    />
+        </div>
+        <div class="login" id="login">
+            <h1>Welcome player</h1>
+            <div class="login__form">
+                <label for="name" class="login__form--label"
+                    >Enter your name</label
+                >
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="login__form--input"
+                    autocapitalize="characters"
+                    novalidate
+                    autocomplete="off"
+                    autofocus
+                />
+                <div class="login__form--check">
+                    <label for="restart">Restart the game at level 1 </label>
+                    <input type="checkbox" id="restart" name="restart" />
                 </div>
+                <input
+                    type="button"
+                    value="PLAY"
+                    class="login__form--submit"
+                    id="submit"
+                    novalidate
+                />
             </div>
+        </div>
+        <div id="modal">
+            <button id="close_modal">x</button>
+            <table>
+                <thead>
+                    <caption>
+                        LEADERBOARD
+                    </caption>
+                    <tr>
+                        <th>POS</th>
+                        <th>NAME</th>
+                        <th>SCORE</th>
+                        <th>ACCURACY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>#1</th>
+                        <td id="0_name"></td>
+                        <td id="0_score"></td>
+                        <td id="0_acc"></td>
+                    </tr>
+                    <tr>
+                        <th>#2</th>
+                        <td id="1_name"></td>
+                        <td id="1_score"></td>
+                        <td id="1_acc"></td>
+                    </tr>
+                    <tr>
+                        <th>#3</th>
+                        <td id="2_name"></td>
+                        <td id="2_score"></td>
+                        <td id="2_acc"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

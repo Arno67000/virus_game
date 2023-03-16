@@ -32,6 +32,7 @@ export class Game {
     }
 
     prepare() {
+        this.menu.prepare(this.user);
         this.canva.addEventListener("click", (event: Event) => {
             const targetElement = event.target;
             if (
@@ -49,19 +50,13 @@ export class Game {
         });
         this.menu.startButton.addEventListener("click", () => {
             if (!this.running) {
-                this.won && this.user.level++;
-                this.over && (this.user.level = 1);
-                this.start(this.won);
+                this.start(!this.over);
             }
         });
     }
 
     private start(keepScore: boolean) {
-        if (!this.running) {
-            this.setupNewGame(keepScore);
-        } else {
-            alert("game is already running");
-        }
+        this.setupNewGame(keepScore);
         this.run();
     }
 
@@ -71,12 +66,14 @@ export class Game {
         if (this.over) {
             this.running = false;
             this.won = false;
-            this.menu.setGameEnd(this.won, this.user.accuracy);
+            this.user.setGameOver(this.hit, this.missed);
+            this.menu.setGameEnd(this.won, this.user.accuracy, this.user.name);
             this.canvaCleanUp();
         } else if (this.time === 0) {
             this.running = false;
             this.won = true;
-            this.menu.setGameEnd(this.won, this.user.accuracy);
+            this.user.setGameWon(this.hit, this.missed);
+            this.menu.setGameEnd(this.won, this.user.accuracy, this.user.name);
         } else {
             const lv = this.user.level;
             const invaders = lv % 2 === 0 ? lv / 2 : Math.ceil(lv / 2);
@@ -113,6 +110,9 @@ export class Game {
     }
 
     private setupNewGame(keepScore: boolean) {
+        if (!keepScore) {
+            this.user.score = 0;
+        }
         this.time = 60;
         this.hit = 0;
         this.missed = 0;
@@ -120,8 +120,5 @@ export class Game {
         this.over = false;
         this.won = false;
         this.menu.setGameStart(this.user.level);
-        if (!keepScore) {
-            this.user.score = 0;
-        }
     }
 }

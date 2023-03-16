@@ -4,20 +4,40 @@
     src: url("../../assets/fonts/Laconic_Regular.otf");
 }
 
+/* VARIABLES */
+$PRIMARY_COLOR: aqua;
+$SECONDARY_COLOR: aquamarine;
+$TERTIARY_COLOR: silver;
+$BACKGROUND_COLOR: black;
+$STD_RADIUS: 20px;
+$LIGHT_RADIUS: 5px;
+$GAME_BORDER: 2px $TERTIARY_COLOR inset;
+$CANVA_HEIGHT: 90%;
+$FULL: 100%;
+$THREE_QRT: 75%;
+
 /* MIXINS */
 @mixin button {
-    background-color: aquamarine;
-    color: black;
+    border: none;
+    background-color: $SECONDARY_COLOR;
+    color: $BACKGROUND_COLOR;
     margin: auto;
     height: auto;
     font-size: 1.2rem;
     font-weight: bold;
-    width: 100%;
+    width: $FULL;
     cursor: pointer;
 }
-
-/* VARIABLES */
-$STD_RADIUS: 20px;
+@mixin modal {
+    padding-bottom: 1%;
+    position: absolute;
+    border-radius: $STD_RADIUS;
+    background-color: $BACKGROUND_COLOR;
+    width: 30%;
+    height: 30%;
+    top: 35%;
+    left: 35%;
+}
 
 /* ANIMATIONS */
 @keyframes virusAnim {
@@ -66,35 +86,35 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    height: $FULL;
+    width: $FULL;
     margin: auto;
 
     &__menu {
         box-sizing: border-box;
-        height: 90%;
+        height: $CANVA_HEIGHT;
         width: 20%;
-        background-color: black;
+        background-color: $BACKGROUND_COLOR;
         border-radius: $STD_RADIUS 0px 0px $STD_RADIUS;
-        border-left: aqua 1px outset;
-        border-bottom: aqua 4px outset;
-        border-top: aqua 4px outset;
-        border-right: silver 4px groove;
-        color: aquamarine;
+        border-left: $PRIMARY_COLOR 1px outset;
+        border-bottom: $PRIMARY_COLOR 4px outset;
+        border-top: $PRIMARY_COLOR 4px outset;
+        border-right: $TERTIARY_COLOR 4px groove;
+        color: $SECONDARY_COLOR;
         padding: 1% 1% 0 1%;
 
         &--description {
             text-align: justify;
+            height: 30%;
         }
         &--board {
             margin-top: 5%;
         }
         &--start {
             @include button;
-            border: none;
             border-radius: $STD_RADIUS;
             &:hover {
-                background-color: aqua;
+                background-color: $PRIMARY_COLOR;
             }
         }
         &--alert-area {
@@ -102,17 +122,30 @@ h2 {
             justify-content: center;
             position: relative;
             margin: auto;
-            width: 60%;
+            width: 50%;
             height: auto;
         }
+        &--scores {
+            @include button;
+            &:hover {
+                background-color: $PRIMARY_COLOR;
+            }
+            &:disabled {
+                background-color: $TERTIARY_COLOR;
+                cursor: not-allowed;
+            }
+        }
+    }
+    &__results--area {
+        height: 18%;
     }
 
     &__canva {
         background-image: url("../../assets/images/city.jpg");
         background-size: cover;
-        border: 2px silver inset;
-        width: 78%;
-        height: 90%;
+        border: $GAME_BORDER;
+        width: $THREE_QRT;
+        height: $CANVA_HEIGHT;
         cursor: crosshair;
         position: relative;
     }
@@ -140,19 +173,17 @@ h2 {
     box-sizing: border-box;
     opacity: 1;
     animation: alertAnim ease-in 1s infinite alternate;
-    width: 75%;
-    height: 75%;
+    width: $THREE_QRT;
+    height: $THREE_QRT;
 }
 
 .login {
-    border-radius: $STD_RADIUS;
-    background-color: black;
-    color: silver;
+    color: $TERTIARY_COLOR;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding-bottom: 1%;
-    width: 30%;
+    @include modal;
 
     &__form {
         display: flex;
@@ -160,22 +191,22 @@ h2 {
         justify-content: space-evenly;
         align-items: center;
         margin: auto;
-        height: 15vh;
+        height: 20vh;
         width: 50%;
 
         &--submit {
-            border-radius: 5px;
+            border-radius: $LIGHT_RADIUS;
             @include button;
             &:hover {
-                background-color: silver;
+                background-color: $TERTIARY_COLOR;
             }
         }
 
         &--input {
-            border: 1px silver solid;
-            background-color: silver;
-            border-radius: 5px;
-            width: 100%;
+            border: 1px $TERTIARY_COLOR solid;
+            background-color: $TERTIARY_COLOR;
+            border-radius: $LIGHT_RADIUS;
+            width: $FULL;
             text-align: center;
             font-weight: bolder;
             font-size: 1.1rem;
@@ -183,9 +214,65 @@ h2 {
         }
 
         &--label {
-            width: 100%;
+            width: $FULL;
             margin-bottom: 1.5%;
             font-style: italic;
+        }
+
+        &--check {
+            width: $FULL;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5%;
+            line-height: 1.5;
+        }
+    }
+}
+
+table {
+    width: $FULL;
+    font-size: 0.9em;
+    color: $PRIMARY_COLOR;
+    text-align: left;
+    padding: 0;
+    margin-bottom: 1%;
+}
+td {
+    font-size: 0.8em;
+}
+
+#modal {
+    @include modal;
+    border: $GAME_BORDER;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+
+    button {
+        align-self: flex-end;
+        justify-self: flex-start;
+        margin-right: 2%;
+        margin-top: 2%;
+        border: none;
+        background-color: $BACKGROUND_COLOR;
+        cursor: pointer;
+        color: $SECONDARY_COLOR;
+        &:hover {
+            color: red;
+        }
+    }
+    table {
+        width: $THREE_QRT;
+        text-align: center;
+        caption,
+        th {
+            color: $SECONDARY_COLOR;
+            font-weight: 1000;
+            text-justify: auto;
+            letter-spacing: 0.2em;
+            margin-bottom: 2%;
         }
     }
 }
